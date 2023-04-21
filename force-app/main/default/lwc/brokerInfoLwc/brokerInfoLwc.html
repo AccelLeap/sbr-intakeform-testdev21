@@ -1,0 +1,437 @@
+<template>
+    <template if:true={isValueString}>
+        <!--<div class="myProgress">
+            This is Employer Information Component and data received from parent is :
+            <div>{selectedval}</div>
+        </div>-->
+        <div class="slds-grid slds-align_absolute-right">
+            <div class="slds-col slds-size_1-of-1">
+                <c-custom-toast auto-close-time="2000"></c-custom-toast>
+            </div>
+        </div>
+
+
+        <div class="slds-box slds-theme_shade">
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">Broker Information</h1>
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+
+            <lightning-record-edit-form object-api-name="Contact" mode="edit">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-3">
+                            <h1 class="subHeader">Broker Primary Contact</h1>
+                            <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-3">
+                            <!--<h1 class="subHeader">Employer Information</h1>-->
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr
+                                    class="slds-required" title="required">* </abbr>
+                                First Name</legend>
+                            <lightning-input-field field-name={primaryFirstNameField} label="First Name"
+                            required="true" variant="label-hidden" onchange={handlePrimaryContactInputChange} value={primaryFirstNameValue}>
+                            </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr
+                                    class="slds-required" title="required">* </abbr>
+                                Last Name</legend>
+                            <lightning-input-field field-name={primaryLastNameField} label="Last Name"
+                            required="true"  variant="label-hidden" onchange={handlePrimaryContactInputChange} value={primaryLastNameValue}>
+                            </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr
+                                    class="slds-required" title="required">* </abbr>
+                                Title</legend>
+                            <lightning-input-field field-name={primaryTitleField} label="Title" variant="label-hidden"
+                            required="true"  onchange={handlePrimaryContactInputChange} value={primaryTitleValue}>
+                            </lightning-input-field>
+                        </div>
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-3">
+                            <!--<h1 class="subHeader">Employer Information</h1>-->
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr
+                                    class="slds-required" title="required">* </abbr>
+                                Phone Number</legend>
+                            <lightning-input-field field-name={primaryPhoneField} label="Phone Number" type="tel"
+                            required="true" variant="label-hidden" onchange={handlePrimaryContactInputChange} value={primaryPhoneValue}>
+                            </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr
+                                    class="slds-required" title="required">* </abbr>
+                                Email</legend>
+                            <lightning-input field-name={primaryEmailField} label="Email" variant="label-hidden"
+                            required="true" onblur={handlePrimaryEmailInputChange} value={primaryEmailValue}  type="email">
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </div>
+
+            </lightning-record-edit-form>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+            <lightning-record-edit-form object-api-name="Contact" >
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Broker Secondary Contact</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label">First Name</legend>
+                        <lightning-input-field field-name={secondaryFirstNameField} label="First Name"
+                         variant="label-hidden" onchange={handleSecondaryContactInputChange} value={secondaryFirstNameValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Last Name</legend>
+                        <lightning-input field-name={secondaryLastNameField} label="Last Name"
+                         variant="label-hidden" onchange={handleSecondaryLastNameChange} value={secondaryLastNameValue}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Title</legend>
+                        <lightning-input-field field-name={secondaryTitleField} label="Title" variant="label-hidden"
+                         onchange={handleSecondaryContactInputChange} value={secondaryTitleValue}>
+                        </lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label">Phone Number</legend>
+                        <lightning-input-field field-name={secondaryPhoneField} label="Phone Number" type="tel"
+                         variant="label-hidden" onchange={handleSecondaryContactInputChange} value={secondaryPhoneValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Email</legend>
+                        <lightning-input field-name={secondaryEmailField} label="Email" variant="label-hidden"
+                        onblur={handleSecondaryEmailInputChange} value={secondaryEmailValue}  type="email">
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+
+            </lightning-record-edit-form>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+            <lightning-record-edit-form object-api-name="Contact">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Broker Tertiary Contact</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label">First Name</legend>
+                        <lightning-input-field field-name={tertiaryFirstNameField} label="First Name"
+                         variant="label-hidden" onchange={handleTertiaryContactInputChange} value={tertiaryFirstNameValue}>
+                        </lightning-input-field>
+                    </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <legend class="slds-form-element__legend slds-form-element__label">Last Name</legend>
+                            <lightning-input field-name={tertiaryLastNameField} label="Last Name"
+                              variant="label-hidden" onchange={handleTertiaryLastNameChange} value={tertiaryLastNameValue}>
+                            </lightning-input>
+                        </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Title</legend>
+                        <lightning-input-field field-name={tertiaryTitleField} label="Title" variant="label-hidden"
+                         onchange={handleTertiaryContactInputChange} value={tertiaryTitleValue}>
+                        </lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label">Phone Number</legend>
+                        <lightning-input-field field-name={tertiaryPhoneField} label="Phone Number" type="tel"
+                         variant="label-hidden" onchange={handleTertiaryContactInputChange} value={tertiaryPhoneValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Email</legend>
+                        <lightning-input field-name={tertiaryEmailField} label="Email" variant="label-hidden"
+                        onblur={handleTertiaryEmailInputChange} value={tertiaryEmailValue}  type="email">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+            </lightning-record-edit-form>
+            <lightning-record-edit-form object-api-name="Contact">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Broker Producer</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label">First Name</legend>
+                        <lightning-input-field field-name={producerFirstNameField} label="First Name"
+                         variant="label-hidden" onchange={handleProducerContactInputChange} value={producerFirstNameValue}>
+                        </lightning-input-field>
+                    </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <legend class="slds-form-element__legend slds-form-element__label">Last Name</legend>
+                            <lightning-input field-name={producerLastNameField} label="Last Name"
+                             variant="label-hidden" onchange={handleProducerLastNameChange} value={producerLastNameValue}>
+                            </lightning-input>
+                        </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Title</legend>
+                        <lightning-input-field field-name={producerTitleField} label="Title" variant="label-hidden"
+                        onchange={handleProducerContactInputChange} value={producerTitleValue}>
+                        </lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label">Phone Number</legend>
+                        <lightning-input-field field-name={producerPhoneField} label="Phone Number" type="tel"
+                         variant="label-hidden" onchange={handleProducerContactInputChange} value={producerPhoneValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Email</legend>
+                        <lightning-input field-name={producerEmailField} label="Email" variant="label-hidden"
+                        onblur={handleProducerEmailInputChange} value={producerEmailValue}  type="email">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+            </lightning-record-edit-form>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_2-of-2">
+                <hr class="solid">
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">Broker Firm</h1>
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>   
+            <lightning-record-edit-form object-api-name="Account" mode="edit">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Firm Name</legend>
+                            <lightning-input type="text" label="" onchange={handleBrokerNameInputChange} value={accountNameValue}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Website</legend>
+                        <lightning-input variant="label-hidden" field-name="websiteField" label="Employer Website"
+                            value={brokerFirmWebsiteValue} onchange={handleBrokerWebsiteValue}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <!--To be hidden later-->
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <template if:true={show}>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="hiddenFields">Hidden Fields on Forms</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Broker Primary Contact
+                        </legend>
+                        <lightning-input-field field-name={brokerPrimaryContactField} variant="label-hidden"
+                            label="Broker Primary Contact" onchange={handleInputChange}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Broker Secondary Contact
+                        </legend>
+                        <lightning-input-field field-name={brokerSecondaryContactField} variant="label-hidden"
+                            label="Broker Secondary Contact" onchange={handleInputChange}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Broker Tertiary Contact
+                        </legend>
+                        <lightning-input-field field-name={brokerTertiaryContactField} variant="label-hidden"
+                            label="Broker Tertiary Contact" onchange={handleInputChange}>
+                        </lightning-input-field>
+                    </div>
+                </div>
+                </template>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Address Information</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Street Address</legend>
+                        <lightning-input-field field-name={billingStreetField} label="Street Address" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={brokerFirmBillingStreetValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            City</legend>
+                        <lightning-input-field field-name={billingCityField} label="City" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={brokerFirmBillingCityValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            State</legend>
+                        <!--<lightning-input-field field-name={billingStateField} label="State" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={billingStateValue}>
+                        </lightning-input-field>-->
+                        <!--<lightning-combobox
+                        name="progress"
+                        value={firmstateValue}
+                        placeholder="Select State"
+                        options={firmStateOptions}
+                        onchange={handleFirmStateChange} >
+                        </lightning-combobox>-->
+                        <lightning-combobox
+                        name="progress1"
+                        value={firmstateValue}
+                        placeholder="Select State"
+                        options={TypeOptions}
+                        category={State_Category__c}
+                        onchange={handleFirmStateChange} >
+                        </lightning-combobox>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Zip Code</legend>
+                        <lightning-input-field field-name={billingZipCodeField} label="Zip Code" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={brokerFirmBillingZipCodeValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Country</legend>
+                        <lightning-input-field field-name={billingCountryField} label="Country" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={billingCountryValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <!--Till here-->
+            </lightning-record-edit-form>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>  
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-float--left">
+                        <lightning-button variant="brand" label="Back" title="Back" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+                <!--<div class="slds-col slds-size_1-of-3">
+                    <div class="slds-float--center">
+                        <lightning-button variant="brand" label="Submit" title="Submit" onclick={handleSubmit} class="slds-m-right_x-small"></lightning-button>
+                    </div>
+                </div>-->
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <div class="slds-float--right">
+                        <lightning-button variant="brand" label="Next" title="Next" onclick={handleNextToRequested} class="slds-m-right_x-small"></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        
+        <div>
+            <c-custom-toast auto-close-time="20000"></c-custom-toast>
+        </div>
+        <div>
+            <c-custom-spinner  help-text={helpText} size="large" variant="brand" show-spinner={showSpinner}></c-custom-spinner>
+        </div> 
+    </template>
+</template>

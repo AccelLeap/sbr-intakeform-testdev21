@@ -1,0 +1,120 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={isValueString}>
+        <div class="slds-grid slds-align_absolute-right">
+            <div class="slds-col slds-size_1-of-1">
+                <c-custom-toast auto-close-time="2000"></c-custom-toast>
+            </div>
+        </div>
+        
+        <div>
+            <c-custom-spinner help-text={helpText} size="large" variant="brand" show-spinner={showSpinner}></c-custom-spinner>
+        </div>
+
+        <div class="slds-box slds-theme_shade">
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <h1 class="mainHeader">Information Required to Quote</h1>
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    <h2>Provided below is a list of the information that we will require to provide a proposal.
+                    <br>You can upload and send these files to us through a HIPAA-compliant, secure process by uploading them to the right.</h2>
+                    <br>
+                    <fieldset class="slds-form-element">
+                        <template for:each={options} for:item="option">
+                            <div key={option.id} class="slds-form-element__control">
+                                <div class="slds-checkbox">
+                                    <input type="checkbox" name="options" id={option.id} value={option.value} onchange={handleDocumentCheck} checked={option.selected}/>
+                                    <label class="slds-checkbox__label" for={option.id}>
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label slds-icon_container slds-icon-utility-announcement">{option.label}</span>
+                                    </label>
+                                    <template if:true={option.required}>
+                                        <abbr class="slds-required" title="required">*</abbr>
+                                    </template>
+                                    <template if:true={option.tooltip.icon}>
+                                        <span class="my-icon">
+                                            <lightning-icon
+                                                icon-name="utility:info"
+                                                alternative-text="Click here"
+                                                title="Click here"
+                                                size="xx-small"
+                                                data-value={option.id}
+                                            ></lightning-icon>
+                                        </span>
+                                        <span if:true={option.tooltip.helpText} style="position: relative;">
+                                            <section class="slds-popover slds-nubbin_left-top" role="dialog" style="position: absolute; left:1rem; top:-1rem;">
+                                                <div class="slds-popover__body slds-popover__body_small">
+                                                    <div class="slds-media">
+                                                        <div class="slds-media__body">
+                                                            <header class="slds-popover__header">
+                                                                <h2 class="slds-text-heading_small">Required</h2>
+                                                            </header>
+                                                            <div class="slds-text-longform">
+                                                                <ul>
+                                                                    <li>First name</li>
+                                                                    <li>Last name</li>
+                                                                    <li>Date of birth</li>
+                                                                    <li>Gender</li>
+                                                                    <li>Home Zip Code</li>
+                                                                    <li>Status (Active, COBRA, Leave of Absence, Terminated)</li>
+                                                                    <li>Relationship Code (Employee, Spouse, Child)</li>
+                                                                    <li>Current Medical Plan Election (if more than one medical plan is offered)</li>
+                                                                    <li>Current Medical Plan Coverage Tier Election (i.e. EE, EE+SP, EE+CH, Family, Waiver)</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </span>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </fieldset>
+                </div>
+                <div class="slds-col">
+                    <div style="padding:100px; border-style: dashed; width:100%;">
+                        <lightning-input
+                            style="text-align:center;"
+                            type="file"
+                            multiple="true"
+                            accept={acceptedFormats}
+                            onchange={handleFiles}>
+                        </lightning-input>
+                        <template if:true={fileData}>
+                            <template for:each={fileData} for:item="imgName" for:index="index">
+                                {imgName.fileName}
+                                <span key={imgName.fileName} data-id={index} onclick={removeReceiptImage} class="close-btn"> x<br /></span>
+                            </template>
+                        </template>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <lightning-button 
+                        variant="brand"
+                        label="Back"
+                        title="Back"
+                        onclick={handleBack}
+                        class="slds-m-right_x-small">
+                    </lightning-button>
+                </div>
+                
+                <div class="slds-col">
+                    <lightning-button 
+                        style="float:right;"
+                        variant="brand"
+                        label="Submit"
+                        title="Submit"
+                        onclick={handleSubmit}
+                        class="slds-m-right_x-small">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

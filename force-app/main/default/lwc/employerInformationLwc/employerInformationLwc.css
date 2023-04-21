@@ -1,0 +1,37 @@
+.lgc-bg {
+    background-color: rgb(242, 242, 242);
+}
+
+.lgc-bg-inverse {
+    background-color: rgb(22, 50, 92);
+}
+
+.lgc-highlight {
+    background-color: rgba(201, 201, 201, 201);
+}
+
+h1.mainHeader {
+    color: rgb(0, 10, 117);
+    font-weight: bold;
+    font-size: 20px;    
+}
+
+h1.subHeader {
+    color: rgb(136, 136, 136);
+    font-weight: bold;
+    font-size: 16px;    
+}
+
+:host {
+    --sds-c-textarea-sizing-min-height: 1em;
+}
+
+.THIS.hideLabel label{
+    display:none;
+}
+
+h1.hiddenFields {
+    color: rgb(124, 14, 14);
+    font-weight: bold;
+    font-size: 17px;    
+}

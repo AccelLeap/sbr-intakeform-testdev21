@@ -1,0 +1,32 @@
+.strong-text {
+    font-weight: bold;
+}
+
+h1.mainHeader {
+    color: rgb(0, 10, 117);
+    font-weight: bold;
+    font-size: 20px;    
+}
+
+h1.subHeader {
+    color: rgb(136, 136, 136);
+    font-weight: bold;
+    font-size: 16px;    
+}
+
+h1.subHeader1 {
+    color: rgb(0, 10, 117);
+    font-weight: bold;
+    font-size: 14px;    
+}
+
+h1.hiddenFields {
+    color: rgb(124, 14, 14);
+    font-weight: bold;
+    font-size: 17px;    
+}
+
+/* Solid border */
+hr.solid {
+    border-top: 3px solid rgb(124, 123, 123);
+  }

@@ -1,0 +1,22 @@
+.strong-text {
+    font-weight: bold;
+}
+
+h1.mainHeader {
+    color: rgb(0, 10, 117);
+    font-weight: bold;
+    font-size: 20px;    
+}
+
+h1.subHeader {
+    color: rgb(136, 136, 136);
+    font-weight: bold;
+    font-size: 16px;    
+}
+
+:host {
+    --sds-c-radio-mark-color-foreground: #000000;
+    --sds-c-radio-color-background-checked: rgb(255, 255, 255);
+    --sds-c-radio-color-border-focus: #9300EA;
+    --sds-c-radio-color-border-checked: #9300EA;
+}

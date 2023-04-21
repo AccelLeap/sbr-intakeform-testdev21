@@ -1,0 +1,112 @@
+<template>
+    <template if:true={isValueString}>
+         <div class="slds-box slds-theme_shade" >
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">Stack Programs</h1>
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+        <lightning-record-edit-form object-api-name="Opportunity">                  
+                <div class="slds-grid">
+                    <div class="checkboxGroup slds-col slds-size_2-of-4">
+                    <lightning-checkbox-group class="mainHeader" name="Checkbox Group 1"
+                      label=""
+                      options={optionOne}
+                      value={optionOneValue}
+                      onchange={handleOptionFirstChange}></lightning-checkbox-group>
+                    </div>
+                    <div class="slds-col slds-size_2-of-4">
+                    </div>
+            </div>
+            <template if:true={noStackPresent}>
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                <h1 class="mainHeader">No Stack Program Matched the Criteria.</h1>
+                <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+              </div>
+          </template>  
+            <div class="slds-grid">
+              <div class="slds-col slds-size_1-of-3">
+                  <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                  <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                  <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+            </div>   
+            <div class="slds-grid">
+              <div class="slds-col slds-size_1-of-3">
+                  <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                  <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+              <div class="slds-col slds-size_1-of-3">
+                  <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+              </div>
+            </div>                      
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+            <div class="slds-grid">
+              <div class="slds-col slds-size_1-of-2">
+                  <div class="slds-float--left">
+                      <lightning-button variant="brand" label="Back" title="Back" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+                  </div>
+              </div>
+              <!--<div class="slds-col slds-size_1-of-2">
+                  <div class="slds-float--right">
+                      <lightning-button variant="brand" label="Submit" title="Submit" onclick={handleSubmit} class="slds-m-right_x-small"></lightning-button>
+                  </div>
+              </div>-->
+              <div class="slds-col slds-size_1-of-2">
+                <div class="slds-float--right">
+                    <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext} class="slds-m-right_x-small"></lightning-button>
+                </div>
+            </div>
+          </div>
+            </lightning-record-edit-form>
+            </div>
+            <div>
+              <c-custom-toast auto-close-time="20000"></c-custom-toast>
+          </div>
+          <div>
+              <c-custom-spinner  help-text={helpText} size="large" variant="brand" show-spinner={showSpinner}></c-custom-spinner>
+          </div> 
+        </template>
+</template>

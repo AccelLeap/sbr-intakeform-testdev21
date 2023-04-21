@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+	<members>IntakeFormLogException</members>
+	<members>IntakeFormLogTriggerHandler</members>
+	<members>IntakeFormWebsiteSearchController</members>
+	<name>ApexClass</name>
+</types>
+<types>
+    <members>brokerInfoLwc</members>
+    <members>customSpinner</members>
+    <members>customToast</members>
+    <members>dataRequiredToQuoteLwc</members>
+    <members>employerInformationLwc</members>
+    <members>intakeFormParentLwc</members>
+    <members>lwcAccountLookup</members>
+    <members>requestedTermsLwc</members>
+    <members>singleSelectLookup</members>
+    <members>singleSelectPBM</members>
+    <members>stackProgramSelectionLwc</members>
+    <members>userInfoLwc</members>
+    <name>LightningComponentBundle</name>
+</types>
+    <version>56.0</version>  
+</Package>

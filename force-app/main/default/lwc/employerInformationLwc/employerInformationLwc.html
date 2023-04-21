@@ -1,0 +1,271 @@
+<template>
+    <template if:true={isValueString}>
+        <!--<div class="myProgress">
+            This is Employer Information Component and data received from parent is :
+            <div>{selectedval}</div>
+        </div>-->
+        <div class="slds-grid slds-align_absolute-right">
+            <div class="slds-col slds-size_1-of-1">
+                <c-custom-toast auto-close-time="2000"></c-custom-toast>
+            </div>
+        </div>
+
+        <div class="slds-box slds-box_x-small slds-theme_shade">
+            <!--<template if:true={show}>
+                <lightning-input type="checkbox-button" label="Validation" checked={isEmpSectionCompleted}
+                    onchange={handleInputChange} value={isEmpSectionCompleted}>
+                </lightning-input>
+            </template>-->
+            <lightning-record-edit-form object-api-name="Account" mode="edit">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">Employer Information</h1>
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3 ">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Employer Name</legend>
+                        <lightning-input-field variant="label-hidden" field-name={accountNameField}
+                            label="Employer Name" onchange={handleInputChange} value={accountNameValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Employer Website</legend>
+                        <!--<lightning-input variant="label-hidden" field-name="websiteField" label="Employer Website"
+                            required="true" onfocus={handleInputFocus} onblur={handleInputBlur} value={searchKey}>
+                        </lightning-input>
+                        <template if:true={show}>
+                        <lightning-input-field variant="label-hidden" field-name={websiteField} label="Employer Website"
+                            onfocus={handleInputFocus} onblur={handleInputBlur} value={websiteValue}>
+                        </lightning-input-field>
+                        </template>-->
+                        <c-lwc-lookup lookup-label="" object-api-name="account" icon-name="standard:account" selected-value={accountName}
+                                  onrecordselection={onAccountSelection} onleavelookup={onLeaveLookup}></c-lwc-lookup> 
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Primary Telephone</legend>
+                        <lightning-input-field field-name={primaryTelephoneField} label="Primary Telephone"
+                            variant="label-hidden" onchange={handleInputChange} type="tel" value={primaryTelephoneValue}>
+                        </lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Standard Industry Classification Code (SIC)</legend>
+                        <lightning-input-field field-name={sicField} variant="label-hidden" 
+                            label="Standard Industry Classification Code (SIC)" required="true"
+                            onchange={handleInputChange} value={sicValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Additional Locations /
+                            Subsidiaries</legend>
+                        <lightning-input-field field-name={additionalLocationField} variant="label-hidden"
+                            label="Additional Locations /  Subsidiaries" onchange={handleInputChange}
+                            value={additionalLocationValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Federal Employee
+                            Identification Number (FEIN)</legend>
+                        <lightning-input-field field-name={federalEmployeeField} variant="label-hidden"
+                            label="Federal Employee Identification Number (FEIN)" onchange={handleInputChange}
+                            value={federalEmployeeValue}>
+                        </lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Address Information</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Street Address</legend>
+                        <lightning-input-field field-name={billingStreetField} label="Street Address" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={billingStreetValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            City</legend>
+                        <lightning-input-field field-name={billingCityField} label="City" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={billingCityValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            State</legend>
+                        <!--<lightning-input-field field-name={billingStateField} label="State" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={billingStateValue}>
+                        </lightning-input-field>-->
+                        <!--<lightning-combobox
+                        name="progress"
+                        value={stateValue}
+                        placeholder="Select State"
+                        options={stateOptions}
+                        onchange={handleStateChange} >
+                        </lightning-combobox>-->
+                        <lightning-combobox
+                        name="progress1"
+                        value={stateValue}
+                        placeholder="Select State"
+                        options={TypeOptions}
+                        category={State_Category__c}
+                        onchange={handleStateChange} >
+                        </lightning-combobox>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Zip Code</legend>
+                        <lightning-input-field field-name={billingZipCodeField} label="Zip Code" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={billingZipCodeValue}
+                            min="1000" max="999999" message-when-range-overflow="Please enter a correct pincode" message-when-range-underflow="Please enter a correct pincode">
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Country</legend>
+                        <lightning-input-field field-name={billingCountryField} label="Country" required="true"
+                            variant="label-hidden" onchange={handleInputChange} value={billingCountryValue}>
+                        </lightning-input-field>
+                        <!--<lightning-combobox
+                        name="country"
+                        value={countryValue}
+                        placeholder="Select Country"
+                        options={countryOptions}
+                        onchange={handleCountryChange} >
+                        </lightning-combobox>-->
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <!--To be removed later from here -->
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <template if:true={show}>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="hiddenFields">Hidden Fields on Forms</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Account Record Type</legend>
+                        <lightning-input-field field-name={recordTypeIdField} variant="label-hidden"
+                            label="Account Record Type" onchange={handleInputChange} value={recordTypeIdValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                </template>
+                <!--Till here-->
+            </lightning-record-edit-form>
+        </div>
+        <!---->
+        <div class="slds-box slds-theme_shade">
+            <lightning-record-edit-form object-api-name="Opportunity">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                title="required">* </abbr>
+                            Number of Eligible Employees</legend>
+                        <lightning-input-field field-name={eligibleEmployeesField} variant="label-hidden"
+                            label="Number of Eligible Employees" class="hideLabel" required="true"
+                            onchange={handleInputChange} value={numberOfEligibleEmployeesValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">
+                            <abbr class="slds-required" title="required">* </abbr>Number of Enrolled Employees
+                        </legend>
+                        <lightning-input-field field-name={enrolledEmployeesField} variant="label-hidden"
+                            label="Number of Enrolled Employees" required="true" onchange={handleInputChange}
+                            value={enrolledEmployeesValue}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-float--left">
+                            <lightning-button variant="brand" label="Back" title="Back" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+                        </div>
+                    </div>
+                    <!--<div class="slds-col slds-size_1-of-3">
+                        <div class="slds-float--center">
+                            <lightning-button variant="brand" label="Submit" title="Submit" onclick={handleSubmit} class="slds-m-right_x-small"></lightning-button>
+                        </div>
+                    </div>-->
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-float--right">
+                            <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext} class="slds-m-right_x-small"></lightning-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </template>
+</template>

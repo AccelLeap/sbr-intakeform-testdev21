@@ -1,0 +1,25 @@
+.strong-text {
+    font-weight: bold;
+}
+
+h1.mainHeader {
+    color: rgb(0, 10, 117);
+    font-weight: bold;
+    font-size: 20px;    
+}
+
+h1.subHeader {
+    color: rgb(136, 136, 136);
+    font-weight: bold;
+    font-size: 16px;    
+}
+
+h1.hiddenFields {
+    color: rgb(124, 14, 14);
+    font-weight: bold;
+    font-size: 17px;    
+}
+
+.lgc-highlight {
+    background-color: rgba(201, 201, 201, 201);
+}

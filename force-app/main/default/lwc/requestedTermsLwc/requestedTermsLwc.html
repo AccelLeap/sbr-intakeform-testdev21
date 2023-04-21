@@ -1,0 +1,949 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={isValueString}>
+        <!--<div class="myProgress">
+            This is Employer Information Component and data received from parent is :
+            <div>{selectedval}</div>
+        </div>-->
+
+        <div class="slds-grid slds-align_absolute-right">
+            <div class="slds-col slds-size_1-of-1">
+                <c-custom-toast auto-close-time="2000"></c-custom-toast>
+            </div>
+        </div>
+
+        <div class="slds-box slds-theme_shade" >
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">Requested Terms</h1>
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+            <lightning-record-edit-form object-api-name="Opportunity">
+                <div class="slds-grid slds-wrap" >
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Effective Date</legend>
+                        <lightning-input-field  field-name={effectiveDateField} label="Effective Date" required="true"
+                        variant="label-hidden" onchange={handleInputChange} value={effectiveDateVal}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Requested Due Date of Quote</legend>
+                        <lightning-input-field  field-name={dueDateToBrokerField} label="Requested Due Date Of Quote" required="true"
+                        variant="label-hidden" onchange={handleInputChange} value={dueDateVal}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Specific Stop-Loss Deductible</legend>
+                        <!--<lightning-input-field  field-name={minimumDeductibleIslField} label="Minimum Deductible - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <lightning-combobox
+                        name="progressDeductibleISL"
+                        value={deductibleValue}
+                        placeholder="Select Deductible"
+                        options={specificStopLossOptions}
+                        onchange={handleSpecificStopLossOptions} >
+                        </lightning-combobox>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Requested Commissions (PEPM)</legend>
+                        <lightning-input-field  field-name={requestedCommisionField} label="Requested Commissions (PEPM)" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Requested Commissions (% of Net Stop-Loss Premium)</legend>
+                        <lightning-input-field  field-name={requestedCommisionPercentField} label="Requested Commissions (% of Net Stop-Loss Premium)" required="true"
+                        variant="label-hidden"  onchange={handleInputChange}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Match Current Medical Plan Design</legend>
+                            <div class="slds-col slds-size_2-of-12">
+                                <span>                            
+                                    <lightning-radio-group name="radioGroup1"
+                                    options={currentMedicalPlanOptions}
+                                    value={selectedMedicalPlanValue}
+                                    type="radio"
+                                    onchange={handleCurrentMedicalPlanSelected}>
+                                    </lightning-radio-group>
+                                </span>
+                            </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                              <span>
+                                  <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                                  Current Agent Of Record</legend>
+                              </span>
+                            <div class="slds-col slds-size_2-of-12">
+                                <span>                            
+                                    <lightning-radio-group name="radioGroup"
+                                    options={currentAgentOfRecordOptions}
+                                    value={selectedAgentOfRecordValue}
+                                    type="radio"
+                                    onchange={handleCurrentAgentSelected}>
+                                    </lightning-radio-group>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Stop-Loss Coverages Included</legend>
+                        <!--<lightning-input-field  field-name={slCoverageIncludedField} label="Stop-Loss Coverages Included" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_8-of-12">
+                        <span>   
+                        <lightning-checkbox-group name="stopLossCoverageIncluded"
+                        options={sLCoverageOptions}
+                        value={selectedSLCoverageValue}
+                        onchange={handleSLCoverageChange}>
+                        </lightning-checkbox-group>
+                        </span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Requested Funding Type</legend>
+                        <!--<lightning-input-field  field-name={slCoverageIncludedField} label="Stop-Loss Coverages Included" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_8-of-12">
+                        <span>                           
+                        <lightning-radio-group name="radioGroupFundingType"
+                            options={requestedFundingTypeOptions}
+                            value={selectedRequestedFundingTypeValue}
+                            type="radio"
+                            onchange={handleRequestedFundingTypeChange}>
+                        </lightning-radio-group>
+                        </span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_2-of-2">
+                    <hr class="solid">
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <!--<div class="slds-col slds-size_1-of-2">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Requested Funding Type</legend>
+                        <lightning-input-field  field-name={requestFundingTypeField} label="Requested Funding Type" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>
+                    </div>-->
+                </div>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Requested Terms - Individual Stop-Loss (ISL)</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Benefits Covered - ISL</legend>
+                        <!--<lightning-input-field  field-name={benefitsCoveredIslField} label="Benefits Covered - ISL" required="true"
+                        variant="label-hidden"  onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_8-of-12">
+                        <span>   
+                        <lightning-checkbox-group name="BenefitsCoveredISL"
+                                 options={benefitCoveredOptions}
+                                 value={selectedbenefitsValue}
+                                 onchange={handlebenefitCoveredChange} disabled={disableBenefitsCoveredISL}>
+                        </lightning-checkbox-group>
+                        </span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Contract Basis - ISL</legend>
+                        <!--<lightning-input-field  field-name={contractBasisIslField} label="Contract Basis - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_6-of-12">
+                            <span>                            
+                                <lightning-radio-group name="radioGroup3"
+                                options={contractIslOptions}
+                                value={selectedContractBasisIslValue}
+                                type="radio"
+                                onchange={handleContractIslRadioChange}>
+                                </lightning-radio-group>
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Retirees Covered - ISL</legend>
+                        <!--<lightning-input-field  field-name={retireesCoveredIslField} label="Retirees Covered - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_2-of-12">
+                            <span>                            
+                                <lightning-radio-group name="radioGroupretirees"
+                                options={retireesCoveredISLRecordOptions}
+                                value={retireesCoveredISLValue}
+                                type="radio"
+                                onchange={handleRetireesCoveredISLSelected}>
+                                </lightning-radio-group>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Deductible Accumulation - ISL</legend>
+                        <lightning-input-field field-name={deductibleAccumulationIslField} label="Deductible Accumulation - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>
+                        
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <span>
+                            <legend class="slds-form-element__legend slds-form-element__label">
+                                <abbr class="slds-required" title="required">* </abbr>
+                                Separate Aggregating Deductiffble - ISL
+                            </legend>
+                        </span>
+
+                        <!-- <span class="my-icon">
+                            <lightning-icon
+                                icon-name="utility:info"
+                                alternative-text="info"
+                                title="info"
+                                size="xx-small"
+                            ></lightning-icon>
+                            <span if:true={showHelpText} style="position: relative;">
+                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left" role="tooltip" id="help" style="position:absolute; width:140px; top: -40px; left: -30px;">
+                                    <div class="slds-popover__body">Insert Help Text Here.</div>
+                                </div>
+                            </span>
+                        </span> -->
+
+                        <lightning-input-field
+                            field-name={separateAggregatingDeductibleField} 
+                            label="Separate Aggregating Deductiffble - ISL"
+                            required="true"
+                            variant="label-hidden" 
+                            class="slds-form-element clshelptexthide" 
+                            onchange={handleInputChange}
+                        ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Maximum Coverage Limit - ISL</legend>
+                        <lightning-input-field  field-name={maximumCoverageLimitIslField} label="Maximum Coverage Limit - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>
+                        
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Advance Reimbursement Provision - ISL</legend>
+                        <lightning-input-field  field-name={advanceReimbursementProvisionIslField} label="Advance Reimbursement Provision - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                    </lightning-input-field> 
+                    </div>
+                    <template if:true={displayTerminalLiabilityOptionISL}>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label">Terminal Liability Option - ISL
+                        </legend>
+                        <lightning-input-field field-name={terminalLiabilityOptionISLField}
+                            variant="label-hidden" label="Terminal Liability Option - ISL"
+                            onchange={handleInputChange}>
+                        </lightning-input-field>
+                    </div>
+                    </template>
+                    <template if:false={displayTerminalLiabilityOptionISL}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </template>                    
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_2-of-2">
+                    <hr class="solid">
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Requested Terms - Aggregate Stop-Loss (ASL)</h1>
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Benefits Covered - ASL</legend>
+                        <!--<lightning-input-field  field-name={benefitsCoveredAslField} label="Benefits Covered - ASL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_1-of-2">
+                            <span>   
+                            <lightning-checkbox-group name="BenefitsCoveredASL"
+                                     options={benefitCoveredASLOptions}
+                                     value={selectedbenefitsASLValue}
+                                     onchange={handlebenefitCoveredASLChange} disabled={disableBenefitsCoveredASL}>
+                            </lightning-checkbox-group>
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                                Contract Basis - ASL</legend>
+                        <!--<lightning-input-field  field-name={contractBasisIslField} label="Contract Basis - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_6-of-12">
+                            <span>                            
+                                <lightning-radio-group name="contractASLGroup"
+                                options={contractAslOptions}
+                                value={selectedContractBasisAslValue}
+                                type="radio"
+                                onchange={handleContractAslRadioChange}>
+                                </lightning-radio-group>
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Retirees Covered - ASL</legend>
+                        <!--<lightning-input-field  field-name={retireesCoveredIslField} label="Retirees Covered - ISL" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <div class="slds-col slds-size_2-of-12">
+                            <span>                            
+                                <lightning-radio-group name="radioGroupretireesASL"
+                                options={retireesCoveredASLRecordOptions}
+                                value={retireesCoveredASLValue}
+                                type="radio"
+                                onchange={handleRetireesCoveredASLSelected}>
+                                </lightning-radio-group>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <template if:true={displayTerminalLiabilityOptionASL}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <legend class="slds-form-element__legend slds-form-element__label"> Terminal Liability Option -
+                                ASL
+                            </legend>
+                            <lightning-input-field field-name={terminalLiabilityOptionASLField} variant="label-hidden"
+                                label="Terminal Liability Option - ASL"
+                        onchange={handleInputChange}>
+                            </lightning-input-field>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <div class="slds-grid slds-grid_vertical">
+                              <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                                  Current Health Plan Funding Arrangement</legend>
+                          <div class="slds-col slds-size_8-of-12">
+                              <span>                            
+                                  <lightning-radio-group name="radioGroup4"
+                                  options={healthPlanFundingOptions}
+                                  value={selectedHealthPlanFundingValue}
+                                  type="radio"
+                                  onchange={healthPlanFundingChange}>
+                                  </lightning-radio-group>
+                              </span>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Current Medical Provider Network</legend>
+                        <lightning-input-field  field-name={currentMedicalProviderNetworkField} label="Current Medical Provider Network" required="true"
+                        variant="label-hidden" onchange={handleInputChange} value={currentMedicalProviderNetworkVal}>
+                        </lightning-input-field>
+                    </div>
+                    </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <!--<h1 class="subHeader">Employer Information</h1>-->
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Current Third Party Administrator</legend>
+                        <div>
+                            <c-single-select-lookup object-api-name="Account" icon-name="standard:account" selected-value={accountnamevalue} onrecordselection={onAccountSelection} onleavelookup={onLeaveTPALookup}></c-single-select-lookup>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Current Pharmacy Benefit Manager</legend>
+                            <div>
+                                <c-single-select-p-b-m object-api-name="Account" icon-name="standard:account" selected-value={pbmaccountnamevalue} onrecordselection={onPBMSelection} onleavelookup={onLeavePBMLookup}></c-single-select-p-b-m>
+                            </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <!--<div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">Employer Information</h1>-->
+                        <!--<legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                            Current Specialty Rx Vendor</legend>-->
+                        <!--<lightning-input-field  field-name={currentSpecialtyRxVendorField} label="Current Specialty Rx Vendor" required="true"
+                        variant="label-hidden" onchange={handleInputChange}>
+                        </lightning-input-field>-->
+                        <!--<lightning-input variant="label-hidden" field-name={currentSpecialtyRxVendorField} label="Current Specialty Rx Vendor"
+                        required="true" onblur={handleInputChange} value={searchCurrentSpecialityKey}>
+                        </lightning-input>-->
+                        <!--<template if:true={disableCurrentSpeciality}>
+                            <div style="pointer-events:none;">
+                            <c-single-select-lookup object-api-name="Account" field-api-name ="Name" filter-cond="" onrecordselection={onSpecialitySelection} onselect={handleChangeRealted} disabled></c-single-select-lookup>
+                            </div>
+                        </template>
+                        <template if:false={disableCurrentSpeciality}>
+                                <c-single-select-lookup object-api-name="Account" field-api-name ="Name" filter-cond="" onrecordselection={onSpecialitySelection} onselect={handleChangeRealted} disabled></c-single-select-lookup>
+                        </template>
+                    </div>
+                    <template if:true={iscurrentSpecialityNotFound}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="text" label="New Speciality Rx Vendor" value={newSPECIALITYValue} onchange={handleNewSpecialityChange} onblur={handleNewSpecialityInputBlur}></lightning-input>
+                        </div>
+                    </template>
+                    <template if:false={iscurrentSpecialityNotFound}>
+                            <div class="slds-col slds-size_1-of-3">
+                                <lightning-input type="text" label="New Speciality Rx Vendor" disabled></lightning-input>
+                            </div>
+                    </template>
+                    <div class="slds-col slds-size_1-of-3">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>-->
+         
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                            </div>
+                            <!--To be hidden later-->
+                            <template if:true={show}>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="hiddenFields">Hidden Fields on Forms</h1>
+                                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Opportunity Type</legend>
+                                    <lightning-input-field field-name={opportunityTypeField} variant="label-hidden"
+                                        label="Opportunity Type" onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Stage</legend>
+                                    <lightning-input-field field-name={stageNameField} variant="label-hidden" label="Stage"
+                                        onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Close Date</legend>
+                                    <lightning-input-field field-name={closeDateField} variant="label-hidden" label="Close Date"
+                                        onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">SBR Producer Firm</legend>
+                                    <lightning-input-field field-name={sBRProducerFirmField} variant="label-hidden"
+                                        label="SBR Producer Firm" onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">SBR Producer
+                                    </legend>
+                                    <lightning-input-field field-name={sBRProducerField} variant="label-hidden" label="SBR Producer
+                                    " onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Received Date - Initial
+                                        Request</legend>
+                                    <lightning-input-field field-name={receivedDateInitialRequestField} variant="label-hidden"
+                                        label="Received Date - Initial Request" onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Broker Firm</legend>
+                                    <lightning-input-field field-name={brokerFirmField} variant="label-hidden" label="Broker Firm"
+                                        onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Broker Primary Contact
+                                    </legend>
+                                    <lightning-input-field field-name={brokerPrimaryContactV2Field} variant="label-hidden" label="Broker Primary Contact"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Broker Secondary Contact
+                                    </legend>
+                                    <lightning-input-field field-name={brokerSecondaryContactField} variant="label-hidden" label="Broker Secondary Contact"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Broker Tertiary Contact
+                                    </legend>
+                                    <lightning-input-field field-name={brokerTertiaryContactField} variant="label-hidden" label="Broker Tertiary Contact"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Broker Producer
+                                    </legend>
+                                    <lightning-input-field field-name={brokerProducerField} variant="label-hidden" label="Broker Producer"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Third Party
+                                        Administrator 1
+                                    </legend>
+                                    <lightning-input-field field-name={requestedThirdPartyAdministrator1Field}
+                                        variant="label-hidden" label="Requested Third Party Administrator 1"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Medical Provider
+                                        Network 1
+                                    </legend>
+                                    <lightning-input-field field-name={requestedMedicalProviderNetwork1Field} variant="label-hidden"
+                                        label="Requested Medical Provider Network 1"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Pharmacy Benefit
+                                        Manager 1
+                                    </legend>
+                                    <lightning-input-field field-name={requestedPharmacyBenefitManager1Field}
+                                        variant="label-hidden" label="Requested Pharmacy Benefit Manager 1"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Third Party
+                                        Administrator 2
+                                    </legend>
+                                    <lightning-input-field field-name={requestedThirdPartyAdministrator2Field}
+                                        variant="label-hidden" label="Requested Third Party Administrator 2"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Medical Provider
+                                        Network 2
+                                    </legend>
+                                    <lightning-input-field field-name={requestedMedicalProviderNetwork2Field} variant="label-hidden"
+                                        label="Requested Medical Provider Network 2"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Pharmacy Benefit
+                                        Manager 2
+                                    </legend>
+                                    <lightning-input-field field-name={requestedPharmacyBenefitManager2Field} variant="label-hidden"
+                                        label="Requested Pharmacy Benefit Manager 2"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Third Party
+                                        Administrator 3
+                                    </legend>
+                                    <lightning-input-field field-name={requestedThirdPartyAdministrator3Field}
+                                        variant="label-hidden" label="Requested Third Party Administrator 3"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Medical Provider
+                                        Network 3
+                                    </legend>
+                                    <lightning-input-field field-name={requestedMedicalProviderNetwork3Field} variant="label-hidden"
+                                        label="Requested Medical Provider Network 3"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Pharmacy Benefit
+                                        Manager 3
+                                    </legend>
+                                    <lightning-input-field field-name={requestedPharmacyBenefitManager3Field} variant="label-hidden"
+                                        label="Requested Pharmacy Benefit Manager 3"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Third Party
+                                        Administrator 4
+                                    </legend>
+                                    <lightning-input-field field-name={requestedThirdPartyAdministrator4Field}
+                                        variant="label-hidden" label="Requested Third Party Administrator 4"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Medical Provider
+                                        Network 4
+                                    </legend>
+                                    <lightning-input-field field-name={requestedMedicalProviderNetwork4Field} variant="label-hidden"
+                                        label="Requested Medical Provider Network 4"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Pharmacy Benefit
+                                        Manager 4
+                                    </legend>
+                                    <lightning-input-field field-name={requestedPharmacyBenefitManager4Field} variant="label-hidden"
+                                        label="Requested Pharmacy Benefit Manager 4"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Plan Mirroring Provision
+                                    </legend>
+                                    <lightning-input-field field-name={planMirroringProvisionField} variant="label-hidden" label="Plan Mirroring Provision"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Actively-At-Work Waived
+                                    </legend>
+                                    <lightning-input-field field-name={activelyAtWorkWaivedField} variant="label-hidden" label="Actively-At-Work Waived"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Cost Containment Strategies
+                                        Utilized
+                                    </legend>
+                                    <lightning-input-field field-name={costContainmentStrategiesUtilizedField}
+                                        variant="label-hidden" label="Cost Containment Strategies Utilized"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Domestic Reimbursement Level
+                                    </legend>
+                                    <lightning-input-field field-name={domesticReimbursementLevelField} variant="label-hidden"
+                                        label="Domestic Reimbursement Level"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Organ Transplants Excluded
+                                    </legend>
+                                    <lightning-input-field field-name={organTransplantsExcludedField} variant="label-hidden" label="Organ Transplants Excluded"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">No New Laser at Renewal
+                                        Provision - ISL
+                                    </legend>
+                                    <lightning-input-field field-name={noNewLaseratRenewalProvisionISLField} variant="label-hidden"
+                                        label="No New Laser at Renewal Provision - ISL"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Premium Rate Cap At Renewal
+                                        (%) - ISL
+                                    </legend>
+                                    <lightning-input-field field-name={premiumRateCapAtRenewalPISLField} variant="label-hidden"
+                                        label="Premium Rate Cap At Renewal (%) - ISL"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Experience Refund Provision -
+                                        ISL
+                                    </legend>
+                                    <lightning-input-field field-name={experienceRefundProvisionISLField} variant="label-hidden"
+                                        label="Experience Refund Provision - ISL"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Premium Rate Tier -
+                                        ISL
+                                    </legend>
+                                    <lightning-input-field field-name={requestedPremiumRateTierISLField} variant="label-hidden"
+                                        label="Requested Premium Rate Tier - ISL"
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Deductible Corridor (%) - ASL
+                                    </legend>
+                                    <lightning-input-field field-name={deductibleCorridorASLField} variant="label-hidden" label="Deductible Corridor (%) - ASL"
+                                onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Minimum Aggregate Attachment
+                                        - ASL (%)
+                                    </legend>
+                                    <lightning-input-field field-name={minimumAggregateAttachmentASLPField} variant="label-hidden"
+                                        label="Minimum Aggregate Attachment - ASL (%)"
+                                onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Premium Rate Tier -
+                                        ASL
+                                    </legend>
+                                    <lightning-input-field field-name={requestedPremiumRateTierASLField} variant="label-hidden"
+                                        label="Requested Premium Rate Tier - ASL"
+                                  onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label">Requested Agg Factor Rate
+                                        Tier - ASL
+                                    </legend>
+                                    <lightning-input-field field-name={requestedAggFactorTierASLField} variant="label-hidden" label="Requested Agg Factor Rate Tier - ASL" 
+                                    onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <!--<h1 class="subHeader">Employer Information</h1>-->
+                                    <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                                        Aggregate Accommodation - ASL</legend>
+                                    <lightning-input-field  field-name={aggregateAccommodationAslField} label="Aggregate Accommodation - ASL" required="true"
+                                    variant="label-hidden" onchange={handleInputChange}>
+                                    </lightning-input-field>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required" title="required">* </abbr>
+                                        Maximum Annual Reimbursement - ASL</legend>
+                                    <lightning-input-field  field-name={maximumAnnualReimbursementField} label="Maximum Annual Reimbursement - ASL" required="true"
+                                    variant="label-hidden" onchange={handleInputChange}>
+                                </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                            </div>
+                            <!--Till here-->
+                            </template>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                                </div>
+                            </div>            
+                            
+                </lightning-record-edit-form>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-float--left">
+                            <lightning-button variant="brand" label="Back" title="Back" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-float--right">
+                            <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext} class="slds-m-right_x-small"></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </template>
+</template>

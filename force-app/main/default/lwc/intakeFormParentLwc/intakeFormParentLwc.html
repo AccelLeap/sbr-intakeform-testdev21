@@ -1,0 +1,159 @@
+<template>
+    <!--<div class="slds-modal__container">-->
+    <div class="slds-box">
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-3">
+                <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+        </div>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-3">
+                <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+            <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
+                <img alt="Image" src={sbrLogo} />
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </div>
+        </div>
+        <div class="slds-grid slds-align_absolute-right">
+            <div class="slds-col slds-size_1-of-1">
+                <c-custom-toast auto-close-time="2000"></c-custom-toast>
+            </div>
+        </div>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-1">
+                <div class="slds-align_absolute-center">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-align_absolute-center">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div style="pointer-events:none;">
+                <div>
+                    <lightning-progress-indicator class="custom-css" current-step={currentvalue} type="path"
+                        variant="base">
+                        <lightning-progress-step label="Personal Information" value="0" onclick={userInfoPathHandler}>
+                        </lightning-progress-step>
+                        <lightning-progress-step label="Employer Information" value="1" onclick={empPathHandler}>
+                        </lightning-progress-step>
+                        <lightning-progress-step label="Broker Information" value="2" onclick={brokerPathHandler}>
+                        </lightning-progress-step>
+                        <lightning-progress-step label="Requested Terms" value="3" onclick={requestedPathHandler}>
+                        </lightning-progress-step>
+                        <lightning-progress-step label="Stack Programs" value="4" onclick={stackPathHandler}>
+                        </lightning-progress-step>
+                        <lightning-progress-step label="Data Required to Quote" value="5" onclick={dataRequiredPathHandler}>
+                        </lightning-progress-step>
+                        <!--<lightning-progress-step label="Misc." value="5" onclick={pathHandler}></lightning-progress-step>-->
+                    </lightning-progress-indicator>
+                </div>
+                </div>
+                <!--<div class="slds-progress">
+                    <ol class="slds-progress__list">
+                        <div style="margin-right: -0.5rem;">Employer Information</div>
+                        <div>Broker Information</div>
+                        <div>Requested Terms</div>
+                        <div style="margin-left: -0.5rem;">Stack Programs</div>
+                    </ol>
+                 </div>-->
+                 <template if:true={formCompletionStatus}>  
+                    <div class="slds-box slds-box_x-small slds-theme_shade">
+                    <div class="slds-modal slds-fade-in-open slds-backdrop">  
+                      <div class="slds-modal__container">  
+                        <!------HEADER Section-->  
+                        <div class="slds-modal__header"> 
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={refreshPage}>
+                                <lightning-icon icon-name="utility:close"
+                                    alternative-text="close"
+                                    variant="inverse"
+                                    size="small" ></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button> 
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <h1 class="mainHeader" style="font-size:2vw">Form Submitted Successfully!</h1>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <img alt="Image" src={sbrLogo} />
+                                </div>
+                            </div> 
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-1">
+                                    <img alt="Image" src={checkIcon} />
+                                </div>
+                            </div> 
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <h1 class="mainHeader" style="font-size:2vw">Thank you!</h1>
+                                    <h1 class="slds-text-heading_medium slds-hyphenate">Your form has been submitted Successfully.</h1>
+                                    <h1 class="slds-text-heading_medium slds-hyphenate">Someone from our team will connect with you within 24 hours.</h1>
+                                </div>
+                                
+                                <div class="slds-col slds-size_1-of-2">
+                                    <h1 class="mainHeader" style="font-size:2vw">Contact Information</h1>
+                                    <h1 class="slds-text-heading_medium slds-hyphenate">177 Huntington Ave Ste 1703</h1>
+                                    <h1 class="slds-text-heading_medium slds-hyphenate">contact-us@company.com</h1>
+                                    <h1 class="slds-text-heading_medium slds-hyphenate">+1-671-555-0108</h1>
+                                </div>
+                            </div> 
+                        </div>  
+                        <!------Body Section-->  
+                        <div class="slds-modal__content slds-p-around_medium">  
+                        </div>  
+                      </div>  
+                    </div>  
+                    </div>
+                  </template>                  
+                <div class="slds-align_absolute-center">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <!--Current Stage is : <b>{selectedvalue}</b>-->
+                <div>
+                    <c-user-info-lwc selectedval={selectedvalue} onpersonalinfocompleteevent={userInfoPathHandler}
+                    onshowspinnerandpasspersonalinfotoempsection={showSpinnerAndPassPersonalinfoToEmpsection}>
+                </c-user-info-lwc>
+                </div>
+                <div>
+                    <c-employer-information-lwc selectedval={selectedvalue} onempcomplete={getEmpCompletionStatus}
+                    onbacktopersonalinfoevent={moveBackToPersonalInfoSection} onpassemployerdetailstobrokersection={passEmployerDetailsToBrokersection}
+                    onpassbrokerfirmdetailstobroker={passBrokerFirmDetailsToBroker} onpassbrokerprimarydetailstobroker={passBrokerPrimaryDetailsToBroker}
+                    onpassbrokersecondarydetailstobroker={passBrokerSecondaryDetailsToBroker} onpassbrokertertiarydetailstobroker={passBrokerTertiaryDetailsToBroker}
+                    onpassbrokerproducerdetailstobroker={passBrokerProducerDetailsToBroker}
+                    onpassuserdetailstodatarequiredtoquote={passDetailsToDataRequiredToQuote}>
+                </c-employer-information-lwc>
+                </div>
+                <div>
+                    <c-broker-info-lwc selectedval={selectedvalue} onbrokercomplete={getBrokerCompletionStatus}
+                    onbacktoempevent={moveBackToEmpSection} onnexttorequestedevent={moveNextToRequestedSection}
+                    onpassempbrokerdetailstodatarequiredtoquote={passEmpBrokerDetailsToDataRequiredToQuote}
+                    onpassoppdetailstorequested={passOppDetailsToRequested}></c-broker-info-lwc>
+                </div>
+                <div>
+                    <c-requested-terms-lwc selectedval={selectedvalue} onrequestedcomplete={getRequestedCompletionStatus}
+                    onbacktobrokerevent={moveBackToBrokerSection} onnexttostackevent={moveNextToStackSection}
+                    onpassoppdetailstostack={passOppDetailsToStack} onpassrequesteddetailstostack={passOppDetailsToStack}
+                    onpassoppdetailstostackprogram={passRequestDetailsToStack}></c-requested-terms-lwc>
+                </div>
+                <div>
+                    <c-stack-program-selection-lwc selectedval={selectedvalue} onbacktorequestedevent={moveBackToRequestedSection}
+                    onnexttodatarequiredtoquote={moveNextToDataRequiredToQuote} 
+                    onpassselectedstacktodatarequiredtoquote={moveSelectedStackToDataRequiredToQuote}>
+                    </c-stack-program-selection-lwc>
+                </div>
+                <div>
+                    <c-data-required-to-quote-lwc selectedval={selectedvalue} onformcompleteevent={openSuccessLWC} onbacktostackevent={moveBackToStackSection} >
+                    </c-data-required-to-quote-lwc>
+                </div>
+</div>
+</div>
+</div>
+<!--</div>-->
+</template>

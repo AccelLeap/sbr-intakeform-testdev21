@@ -1,0 +1,138 @@
+<template>
+    <template if:true={isValueString}>
+        <div class="slds-grid slds-align_absolute-right">
+            <div class="slds-col slds-size_1-of-1">
+                <c-custom-toast auto-close-time="2000"></c-custom-toast>
+            </div>
+        </div>
+         <div class="slds-box slds-theme_shade" >
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="mainHeader">Personal Information</h1>
+                    <h1 class="mainHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-float--left">
+                      <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                </div>
+                <!--<div class="slds-col slds-size_1-of-2">
+                    <div class="slds-float--right">
+                        <lightning-button variant="brand" label="Submit" title="Submit" onclick={handleSubmit} class="slds-m-right_x-small"></lightning-button>
+                    </div>
+                </div>-->
+                <lightning-record-edit-form object-api-name="Opportunity">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-3">
+                            <!--<h1 class="subHeader">Employer Information</h1>-->
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                    title="required">* </abbr>
+                                Name</legend>
+                            <lightning-input-field variant="label-hidden" field-name={intakeFormUserNameField}
+                                label="User Name" onchange={handleInputChange} value={intakeFormUserNameValue}>
+                            </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <!--<h1 class="subHeader">Employer Information</h1>-->
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                    title="required">* </abbr>
+                                Title</legend>
+                            <lightning-input-field variant="label-hidden" field-name={intakeFormUserTitleField}
+                                label="Title" onchange={handleInputChange} value={intakeFormUserTitleValue}>
+                            </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <!--<h1 class="subHeader">Employer Information</h1>-->
+                            <legend class="slds-form-element__legend slds-form-element__label"><abbr class="slds-required"
+                                    title="required">* </abbr>
+                                Email</legend>
+                            <lightning-input-field variant="label-hidden" field-name={intakeFormUserEmailField}
+                                label="Email" onchange={handleInputChange} value={intakeFormUserEmailValue} type="email"> 
+                            </lightning-input-field>
+                        </div>
+                    </div>
+                </lightning-record-edit-form>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-float--left">
+                              <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <div class="slds-float--right">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-float--left">
+                              <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <div class="slds-float--right">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-float--left">
+                          <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                  <div class="slds-float--right">
+                      <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext} class="slds-m-right_x-small"></lightning-button>
+                  </div>
+                </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-float--left">
+                              <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <div class="slds-float--right">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-float--left">
+                              <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <div class="slds-float--right">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-float--left">
+                              <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <div class="slds-float--right">
+                        <h1 class="subHeader">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+</template>
